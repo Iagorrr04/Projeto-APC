@@ -541,7 +541,10 @@ int selecionarVooAConWin()
             printf ("\n                                                                             %c%c %s %c%c\n", indicadoresE[i], indicadoresE[i], todosVoos[i].numVoo, indicadoresD[i], indicadoresD[i]);
         }
         fflush(stdin);
-        posChar = getch();
+        #if defined(_WIN32) || defined(_WIN64)
+            posChar = getch();
+        #endif
+
 
         // Alterar a posicao do indicador de acordo com o input.
         limparVetorChar(indicadoresE, MAXvoos);    
@@ -913,7 +916,6 @@ int menuPrincipal()
         mostrarHub();
         printf ("\n");
         printf ("\n                                                               Escolha uma op��o abaixo e pressione ENTER");
-        printf ("\n                                                                       Navegue com: ^W^ e vSv");
         printf ("\n");
         printf ("\n                                                                          n1. Cadastrar voo");
         printf ("\n");
@@ -944,7 +946,7 @@ int menuPrincipal()
     }while ((opcao > 9) || (opcao < 1));
 
 
-    return opcao;
+    return opcao-1;
 }
 
 //Fun��o para receber a op��o do menu principal de um usu�rio windows.
@@ -990,7 +992,11 @@ int menuPrincipalWin()
         limparVetorChar(posR, 10);
         
         //Recebendo input e realizando "movimento"
-        input = getch();
+        #if defined(_WIN32) || defined(_WIN64)
+            input = getch();
+        #endif
+
+
         if (input == 13)
         {
             return pos;
@@ -1500,9 +1506,16 @@ void cadastrarVoo()
     }
     
 
-    printf ("\n                                                           >> DIGITE QUALQUER TECLA PRA RETORNAR AO MENU PRINCIPAL <<");
     fflush(stdin);
-    getch();
+    #if defined(_WIN32) || defined(_WIN64)
+        printf ("\n                                                           >> DIGITE QUALQUER TECLA PRA RETORNAR AO MENU PRINCIPAL <<");
+        getch();
+    #else
+        printf("\n                                                                   >> PRESSIONE ENTER PARA CONTINUAR <<");
+        getc;
+    #endif
+
+
 }
 
 /*
@@ -1628,6 +1641,8 @@ void consultarVoo()
     #endif
     // Com  a posi��o do voo escolhido basta exibir os dados do voo.
     exibirDadosVoo(indiceVooACon);
+    printf("exibir dados do voo %i", indiceVooACon);
+    getc;
 
     // Na mesma l�gica exibir as reservas ativas.
     int spc;
@@ -1641,9 +1656,14 @@ void consultarVoo()
     }
     //Printar isso no final da dela caso d� espa�o
     espacamentoVertical(12-spc);
-    printf ("\n                                                      >> DIGITE QUALQUER TECLA PARA RETORNAR AO MENU PRINCIPAL <<");
     fflush(stdin);
-    getch();
+    #if defined(_WIN32) || defined(_WIN64)
+        printf ("\n                                                      >> DIGITE QUALQUER TECLA PARA RETORNAR AO MENU PRINCIPAL <<");
+        getch();
+    #else
+        printf("\n                                                                   >> PRESSIONE ENTER PARA CONTINUAR <<");
+        getc;
+    #endif
 }
 
 /*
@@ -2265,7 +2285,9 @@ int selecionarNumVooRes()
             printf ("\n                                                                             %c%c %s %c%c\n", indicadoresE[i], indicadoresE[i], todosVoos[i].numVoo, indicadoresD[i], indicadoresD[i]);
         }
         fflush(stdin);
-        posChar = getch();
+        #if defined(_WIN32) || defined(_WIN64)
+            posChar = getch();
+        #endif
 
         // Alterar a posicao do indicador de acordo com o input.
         limparVetorChar(indicadoresE, MAXvoos);    
@@ -2443,9 +2465,14 @@ void cadastrarReserva()
         printf ("\n                                                                          RESERVA N�O CONCLU�DA");
     }
 
-    printf ("\n                                                      >> DIGITE QUALQUER TECLA PARA RETORNAR AO MENU PRINCIPAL <<");
     fflush(stdin);
-    getch();
+    #if defined(_WIN32) || defined(_WIN64)
+        printf ("\n                                                      >> DIGITE QUALQUER TECLA PARA RETORNAR AO MENU PRINCIPAL <<");
+        getch();
+    #else
+        printf("\n                                                                   >> PRESSIONE ENTER PARA CONTINUAR <<");
+        getc;
+    #endif
 }
 
 // Fun��o para recber confirma��o de um voo, 1 pra sim 0 para n�o.
@@ -2598,7 +2625,9 @@ int selecionarReservaACon()
         {
             printf ("\n                                                                           %c%c %s %c%c", indicadoresE[i], indicadoresE[i], todasReservas[i].numRes, indicadoresD[i], indicadoresD[i]);
         }
-        input = getch();
+        #if defined(_WIN32) || defined(_WIN64)
+            input = getch();
+        #endif
 
         limparVetorChar(indicadoresE, MAXvoos);
         limparVetorChar(indicadoresD, MAXvoos);
@@ -2713,9 +2742,14 @@ void exibirReservasCliente(char CPFCliente[MAXCPF])
     }
 
     espacamentoVertical(12-spc);
-    printf ("\n                                                    >>  DIGITE QUALQUER TECLA PARA RETORNAR AO MENU PRINCIPAL <<");
     fflush(stdin);
-    getch();
+    #if defined(_WIN32) || defined(_WIN64)
+        printf ("\n                                                    >>  DIGITE QUALQUER TECLA PARA RETORNAR AO MENU PRINCIPAL <<");
+        getch();
+    #else
+        printf("\n                                                                   >> PRESSIONE ENTER PARA CONTINUAR <<");
+        getc;
+    #endif
 }
 
 // Fun��o para consultar um cliente.
@@ -2872,7 +2906,9 @@ int selecionarVooACanWin()
             printf ("\n                                                                             %c%c %s %c%c\n", indicadoresE[i], indicadoresE[i], todosVoos[i].numVoo, indicadoresD[i], indicadoresD[i]);
         }
         fflush(stdin);
-        posChar = getch();
+        #if defined(_WIN32) || defined(_WIN64)
+            posChar = getch();
+        #endif
 
         // Alterar a posicao do indicador de acordo com o input.
         limparVetorChar(indicadoresE, MAXvoos);    
@@ -3311,7 +3347,9 @@ int selecionarVooAExcWin()
             printf ("\n                                                                             %c%c %s %c%c\n", indicadoresE[i], indicadoresE[i], todosVoos[i].numVoo, indicadoresD[i], indicadoresD[i]);
         }
         fflush(stdin);
-        posChar = getch();
+        #if defined(_WIN32) || defined(_WIN64)
+            posChar = getch();
+        #endif
 
         // Alterar a posicao do indicador de acordo com o input.
         limparVetorChar(indicadoresE, MAXvoos);    
@@ -3394,9 +3432,14 @@ void excluirVoo()
         printf ("\n                                                                        EXCLUS�O DE VOO ABORTADA");
     }
 
-    printf ("\n                                                         >>  PRESSIONE ENTER PARA RETORNAR AO MENU PRINCIPAL <<");
     fflush(stdin);
-    getch();
+    #if defined(_WIN32) || defined(_WIN64)
+        printf ("\n                                                         >>  PRESSIONE ENTER PARA RETORNAR AO MENU PRINCIPAL <<");
+        getch();
+    #else
+        printf("\n                                                                   >> PRESSIONE ENTER PARA CONTINUAR <<");
+        getc;
+    #endif
 }
 
 // Fun��o para "encerrar" o programa.
@@ -3404,5 +3447,5 @@ void sairDoPrograma()
 {
     mostrarHub();
     espacamentoVertical(2);
-    printf("\n                                                                 ! Programa finalizado com sucesso !");
+    printf("\n                                                                 ! Programa finalizado com sucesso !\n\n");
 }
